@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fitness-app-deployment
+spec:
+  replicas: 2 # Runs two copies of your app for high availability
+  selector:
+    matchLabels:
+      app: fitness-app
+  template:
+    metadata:
+      labels:
+        app: fitness-app
+    spec:
+      containers:
+      - name: fitness-app
+        # This is the full path to the image you pushed to ACR
+        image: devopsfitnessregistry.azurecr.io/fitness-app:v1
+        ports:
+        - containerPort: 3000
