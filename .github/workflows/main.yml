@@ -50,11 +50,10 @@ jobs:
     - name: Update Kubernetes manifest with new image tag
       run: sed -i 's|:v1|:${{ github.sha }}|' deployment.yaml
 
-    - name: Install Ansible and Kubernetes Python Library
-      run: |
-        sudo apt-get update
-        sudo apt-get install ansible -y
-        pip3 install kubernetes
+    - name: Install Kubernetes library for Ansible
+      # This is the corrected step.
+      # It injects 'kubernetes' into the 'ansible-core' environment managed by pipx.
+      run: pipx inject ansible-core kubernetes
 
     - name: Run Ansible Playbook
       run: ansible-playbook playbook.yml
