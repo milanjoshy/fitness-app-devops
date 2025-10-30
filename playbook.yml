@@ -10,9 +10,13 @@
         state: present
         src: deployment.yaml
         namespace: default
+        verify_ssl: no
+        kubeconfig: /root/.kube/config
 
     - name: Apply Kubernetes Service
       kubernetes.core.k8s:
         state: present
         src: service.yaml
         namespace: default
+        verify_ssl: no
+        kubeconfig: /root/.kube/config
